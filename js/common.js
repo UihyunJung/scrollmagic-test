@@ -101,5 +101,22 @@ $(function(){
         })
         .addTo(controller);
 
+    var wipeAnimation = new TimelineMax()
+        .fromTo(".panel.red", 1, {x: "-100%"}, {x: "0%", ease: Linear.easeNone})  // in from left
+        .fromTo(".panel.yellow",    1, {x:  "100%"}, {x: "0%", ease: Linear.easeNone})  // in from right
+        .fromTo(".panel.green", 1, {y: "-100%"}, {y: "0%", ease: Linear.easeNone}); // in from top
+
+    // create scene to pin and link animation
+    new ScrollMagic.Scene({
+            triggerElement: "#sectionWipe",
+            triggerHook: "onLeave",
+            duration: "300%"
+        })
+        .setPin("#sectionWipe")
+        .setTween(wipeAnimation)
+        .addIndicators({
+            name:"5"
+        }) // add indicators (requires plugin)
+        .addTo(controller);
 });
 
